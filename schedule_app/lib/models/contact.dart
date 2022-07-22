@@ -22,4 +22,8 @@ class Contact {
     phone = map['phone'];
     id = map['id'];
   }
+
+  void getName(String name) {
+    name = this.name;
+  }
 }
