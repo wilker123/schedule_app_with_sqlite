@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+import '../bd/contact_table.dart';
+import '../models/contact.dart';
 
 class PostContact extends StatefulWidget {
   const PostContact({
@@ -13,6 +17,17 @@ class PostContact extends StatefulWidget {
 }
 
 class _PostContactState extends State<PostContact> {
+  final name = TextEditingController();
+  final phone = TextEditingController();
+  var db = GetIt.I.get<ContactTable>();
+
+  _cadastrarContact() async {
+    var c = Contact(id: 0, name: name.text, phone: phone.text);
+    await db.insertContact(c);
+    widget.onUpdateList();
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +39,9 @@ class _PostContactState extends State<PostContact> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: name,
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "Informe o nome do contato",
                 ),
@@ -33,8 +49,9 @@ class _PostContactState extends State<PostContact> {
               const SizedBox(
                 height: 20,
               ),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: phone,
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: "Informe o telefone do contato",
                 ),
@@ -47,7 +64,7 @@ class _PostContactState extends State<PostContact> {
                 width: double.infinity,
                 child: ElevatedButton(
                   child: const Text("Salvar"),
-                  onPressed: () {},
+                  onPressed: _cadastrarContact,
                 ),
               ),
             ],
