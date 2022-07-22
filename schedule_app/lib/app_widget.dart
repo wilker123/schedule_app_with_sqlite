@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ListContacts(),
+      home: const ListContacts(),
     );
   }
 }

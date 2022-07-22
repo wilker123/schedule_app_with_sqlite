@@ -36,12 +36,12 @@ class _ListContactsState extends State<ListContacts> {
       appBar: AppBar(
         title: const Text("Contatos"),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: 400,
                 width: double.infinity,
                 child: FutureBuilder<List<Contact>>(

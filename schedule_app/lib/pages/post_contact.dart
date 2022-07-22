@@ -20,42 +20,37 @@ class _PostContactState extends State<PostContact> {
         title: const Text("Novo contato"),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Center(
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 17),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Informe o nome do contato",
-                    ),
-                  ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              const TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Informe o nome do contato",
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 17),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Informe o telefone do contato",
-                    ),
-                  ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Informe o telefone do contato",
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 17),
-                  child: SizedBox(
-                    height: 40,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      child: const Text("Salvar"),
-                      onPressed: () {},
-                    ),
-                  ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 40,
+                width: double.infinity,
+                child: ElevatedButton(
+                  child: const Text("Salvar"),
+                  onPressed: () {},
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
