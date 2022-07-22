@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:schedule_app/pages/post_contact.dart';
 
 import '../bd/contact_table.dart';
 import '../models/contact.dart';
@@ -33,7 +34,7 @@ class _ListContactsState extends State<ListContacts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contatos"),
+        title: const Text("Contatos"),
       ),
       body: Container(
         width: double.infinity,
@@ -61,7 +62,7 @@ class _ListContactsState extends State<ListContacts> {
                     } else if (snapshot.hasError) {
                       Text("${snapshot.error}");
                     }
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   },
                 ),
               ),
@@ -72,8 +73,16 @@ class _ListContactsState extends State<ListContacts> {
                   height: 40,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("Novo contato"),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PostContact(onUpdateList: atualizarDados),
+                        ),
+                      );
+                    },
+                    child: const Text("Novo contato"),
                   ),
                 ),
               )
