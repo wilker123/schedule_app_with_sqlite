@@ -7,8 +7,8 @@ class DataBaseHelper {
 
   Future<Database> getDB() async {
     database = openDatabase(join(await getDatabasesPath(), 'bdcurso.db'),
-        onCreate: (db, version) {
-      return db.execute(
+        onCreate: (db, version) async {
+      await db.execute(
         "CREATE TABLE contact(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, phone TEXT)",
       );
     }, version: 1);

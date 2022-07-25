@@ -4,26 +4,41 @@ import 'package:get_it/get_it.dart';
 import '../bd/contact_table.dart';
 import '../models/contact.dart';
 
-class PostContact extends StatefulWidget {
-  const PostContact({
+class UpdateContact extends StatefulWidget {
+  const UpdateContact({
     Key? key,
     required this.onUpdateList,
+    required this.contact,
   }) : super(key: key);
-
+  final Contact contact;
   final VoidCallback onUpdateList;
 
   @override
-  State<PostContact> createState() => _PostContactState();
+  State<UpdateContact> createState() => _UpdateContactState();
 }
 
-class _PostContactState extends State<PostContact> {
+class _UpdateContactState extends State<UpdateContact> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    name.text = widget.contact.name;
+    phone.text = widget.contact.phone;
+  }
+
   final name = TextEditingController();
   final phone = TextEditingController();
   var db = GetIt.I.get<ContactTable>();
 
-  _cadastrarContact() async {
-    var c = Contact(id: 0, name: name.text, phone: phone.text);
-    await db.insertContact(c);
+  _updateContact() async {
+    var c = Contact(id: widget.contact.id, name: name.text, phone: phone.text);
+    await db.updateContact(c);
+    widget.onUpdateList();
+    Navigator.of(context).pop();
+  }
+
+  _removeContact() async {
+    await db.deleteContact(widget.contact.id);
     widget.onUpdateList();
     Navigator.of(context).pop();
   }
@@ -63,8 +78,8 @@ class _PostContactState extends State<PostContact> {
                 height: 40,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: _cadastrarContact,
-                  child: const Text("Salvar"),
+                  onPressed: _updateContact,
+                  child: const Text("Atualizar"),
                 ),
               ),
             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:schedule_app/pages/post_contact.dart';
+import 'package:schedule_app/pages/update_contact.dart';
 
 import '../bd/contact_table.dart';
 import '../models/contact.dart';
@@ -55,7 +56,17 @@ class _ListContactsState extends State<ListContacts> {
                         itemBuilder: (context, index) {
                           return ListTile(
                             title: Text(data[index].name),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => UpdateContact(
+                                    onUpdateList: atualizarDados,
+                                    contact: data[index],
+                                  ),
+                                ),
+                              );
+                            },
                           );
                         },
                       );
